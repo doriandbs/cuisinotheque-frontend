@@ -50,7 +50,7 @@ const UserButton = styled(Button)`
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
-
+ 
   return (
     <NavbarContainer position="static">
       <Toolbar>

@@ -11,7 +11,7 @@ import AuthProvider from './contexts/AuthContext';
 import PrivateRoute from './components/privateRoutes/PrivateRoute';
 import AddRecipe from './pages/recipes/addRecipe/AddRecipe';
 import AllRecipes from './pages/recipes/allRecipes/AllRecipes';
-
+ 
 const AppRoutes = () => {
   return (
       <AuthProvider>

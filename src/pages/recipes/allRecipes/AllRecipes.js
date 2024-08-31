@@ -6,7 +6,7 @@ const RecipesContainer = styled.div`
   display: flex;
   height: 100vh;
 `;
-
+ 
 const RecipeList = styled.div`
   width: 30%;
   background-color: #f8f9fa;
