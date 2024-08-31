@@ -133,6 +133,7 @@ const Recipes = () => {
               ))}
             </ul>
           </>
+          
         ) : (
           <Placeholder>Sélectionnez une recette pour voir les détails</Placeholder>
         )}

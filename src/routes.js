@@ -10,6 +10,7 @@ import Footer from './components/footer/Footer';
 import AuthProvider from './contexts/AuthContext'; 
 import PrivateRoute from './components/privateRoutes/PrivateRoute';
 import AddRecipe from './pages/recipes/addRecipe/AddRecipe';
+
 const AppRoutes = () => {
   return (
       <AuthProvider>

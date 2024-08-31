@@ -68,6 +68,7 @@ const Recipes = () => {
   const handleRecipeSelect = (recipe) => {
     setSelectedRecipe(recipe);
   };
+  
 
   return (
     <RecipesContainer>

@@ -49,6 +49,7 @@ const AddRecipe = () => {
       console.error(err);
     }
   };
+  
 
   return (
     <Box sx={{ padding: '2rem' }}>

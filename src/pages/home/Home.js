@@ -70,6 +70,7 @@ const MessageContainer = styled.div`
   }
 `;
 
+
 const Home = () => {
   const { user } = useContext(AuthContext);  
   const [url, setUrl] = useState('');

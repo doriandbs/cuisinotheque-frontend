@@ -13,6 +13,7 @@ const RegisterContainer = styled(Container)`
     margin-top: 5rem;
 `;
 
+
 const Register = () => {
     const { register } = useContext(AuthContext);
     const navigate = useNavigate();
