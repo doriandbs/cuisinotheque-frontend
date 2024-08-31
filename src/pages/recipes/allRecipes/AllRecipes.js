@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import HomeService from '../../../services/homeService/HomeService';
+import jsPDF from 'jspdf';
+import { Button } from '@mui/material';
 
 const RecipesContainer = styled.div`
   display: flex;
@@ -115,6 +117,28 @@ const AllRecipes = () => {
     setSelectedRecipe(recipe);
   };
 
+  const handleDownloadPDF = () => {
+    if (!selectedRecipe) return;
+
+    const doc = new jsPDF();
+
+    doc.setFontSize(20);
+    doc.text(selectedRecipe.title, 10, 10);
+
+    doc.setFontSize(16);
+    doc.text('Ingrédients', 10, 20);
+    selectedRecipe.ingredients.forEach((ingredient, index) => {
+      doc.text(`${index + 1}. ${ingredient.quantity} ${ingredient.ingredient}`, 10, 30 + index * 10);
+    });
+
+    doc.text('Instructions', 10, 30 + selectedRecipe.ingredients.length * 10 + 10);
+    selectedRecipe.instructions.forEach((instruction, index) => {
+      doc.text(`${index + 1}. ${instruction.instruction}`, 10, 40 + selectedRecipe.ingredients.length * 10 + index * 10);
+    });
+
+    doc.save(`${selectedRecipe.title}.pdf`);
+  };
+
   return (
     <RecipesContainer>
       <RecipeList>
@@ -132,6 +156,14 @@ const AllRecipes = () => {
       <RecipeDetail>
         {selectedRecipe ? (
           <>
+          <Button 
+              variant="contained" 
+              color="primary" 
+              onClick={handleDownloadPDF}
+              sx={{ marginTop: '1rem' }}
+            >
+              Exporter en PDF
+            </Button>
             <RecipeTitle>{selectedRecipe.title}</RecipeTitle>
             <SectionTitle>Ingrédients</SectionTitle>
             <ul>
@@ -147,6 +179,7 @@ const AllRecipes = () => {
                 <Instruction key={index}>{instruction.instruction}</Instruction>
               ))}
             </ul>
+            
           </>
         ) : (
           <Placeholder>Sélectionnez une recette pour voir les détails</Placeholder>
