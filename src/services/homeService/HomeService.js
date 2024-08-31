@@ -8,11 +8,11 @@ const HomeService = {
       }
     });
   },
+  analyzeRecipeText(recipeText){
+    return axios.get(`recipes/openai?message=${encodeURIComponent(recipeText)}`);
+  },
 
   createRecipe(recipeDTO) {
-    console.log(recipeDTO)
-    const token = localStorage.getItem('token');
-    console.log(token)
     return axios.post('/recipes/create', recipeDTO);
   },
 

@@ -16,7 +16,7 @@ const HomeContainer = styled.div`
   color: #fff;
   text-align: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     height: auto;
     padding: 2rem 1rem;
   }
@@ -29,7 +29,7 @@ const Title = styled.h1`
   font-family: 'Raleway', sans-serif;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     font-size: 3rem;
   }
 
@@ -106,13 +106,20 @@ const MessageContainer = styled.div`
 const Home = () => {
   const { user } = useContext(AuthContext);  
   const [url, setUrl] = useState('');
+  const [recipeText, setRecipeText] = useState(''); // New state for recipe text
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleScrape = async () => {
     setError('');
     try {
-      const response = await HomeService.scrapeRecipe(url);
+      let response;
+      console.log("recipeText", recipeText)
+      if (recipeText) {
+        response = await HomeService.analyzeRecipeText(recipeText); // New service method for text
+      } else if (url) {
+        response = await HomeService.scrapeRecipe(url);
+      }
       navigate('/addrecipe', { state: { recipeDTO: response.data } });
     } catch (err) {
       setError(err.message);
@@ -130,6 +137,15 @@ const Home = () => {
             variant="outlined"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
+          />
+          <Subtitle>OU</Subtitle>
+          <StyledTextField
+            label="Collez votre recette ici"
+            variant="outlined"
+            multiline
+            rows={6}
+            value={recipeText}
+            onChange={(e) => setRecipeText(e.target.value)}
           />
           <StyledButton variant="contained" onClick={handleScrape}>
             Ajouter une recette

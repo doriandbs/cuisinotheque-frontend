@@ -128,7 +128,7 @@ const AllRecipes = () => {
     doc.setFontSize(16);
     doc.text('Ingrédients', 10, 20);
     selectedRecipe.ingredients.forEach((ingredient, index) => {
-      doc.text(`${index + 1}. ${ingredient.quantity} ${ingredient.ingredient}`, 10, 30 + index * 10);
+      doc.text(`${index + 1}. ${ingredient.ingredient}`, 10, 30 + index * 10);
     });
 
     doc.text('Instructions', 10, 30 + selectedRecipe.ingredients.length * 10 + 10);
