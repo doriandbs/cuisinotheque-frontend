@@ -15,6 +15,11 @@ const HomeContainer = styled.div`
               url('/assets/home-background.jpg') no-repeat center center/cover;
   color: #fff;
   text-align: center;
+
+  @media (max-width: 768px) {
+    height: auto;
+    padding: 2rem 1rem;
+  }
 `;
 
 const Title = styled.h1`
@@ -23,6 +28,14 @@ const Title = styled.h1`
   margin-bottom: 1.5rem;
   font-family: 'Raleway', sans-serif;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
+  @media (max-width: 768px) {
+    font-size: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const Subtitle = styled.p`
@@ -31,6 +44,14 @@ const Subtitle = styled.p`
   margin-bottom: 3rem;
   font-family: 'Open Sans', sans-serif;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const StyledTextField = styled(TextField)`
@@ -39,6 +60,10 @@ const StyledTextField = styled(TextField)`
     width: 300px;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 5px;
+
+    @media (max-width: 480px) {
+      width: 100%;
+    }
   }
 `;
 
@@ -49,6 +74,10 @@ const StyledButton = styled(Button)`
     background-color: #ff9800;
     &:hover {
       background-color: #ffb74d;
+    }
+
+    @media (max-width: 480px) {
+      width: 100%;
     }
   }
 `;
@@ -68,8 +97,11 @@ const MessageContainer = styled.div`
       color: #ffffff;
     }
   }
-`;
 
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+  }
+`;
 
 const Home = () => {
   const { user } = useContext(AuthContext);  

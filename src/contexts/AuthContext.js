@@ -7,7 +7,6 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -22,18 +21,19 @@ const AuthProvider = ({ children }) => {
             .catch(error => {
                 console.error('Erreur lors de la récupération des informations utilisateur', error);
                 localStorage.removeItem('token');
+            })
+            .finally(() => {
+                setLoading(false);
             });
+        } else {
+            setLoading(false);
         }
-        setLoading(false);
     }, []);
 
     const login = async (credentials) => {
         try {
-            console.log(credentials)
             const response = await axios.post('/account/login', credentials);
             const { token, user } = response.data;
-            console.log("TOOKEN",token)
-            console.log(user)
             localStorage.setItem('token', token);
             setUser(user);
         } catch (err) {
@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{ user, login, register, logout, loading }}>
-            {children}
+            {!loading && children}
         </AuthContext.Provider>
     );
 };

@@ -11,8 +11,33 @@ const RegisterContainer = styled(Container)`
     flex-direction: column;
     align-items: center;
     margin-top: 5rem;
+  height: 100vh;
+
+    @media (max-width: 600px) {
+        margin-top: 2rem; /* Réduit la marge supérieure sur mobile */
+        padding: 0 1rem; /* Ajoute du padding pour éviter que le contenu ne touche les bords */
+    }
 `;
 
+const StyledBox = styled(Box)`
+    width: 100%;
+    
+    @media (max-width: 600px) {
+        padding: 0.5rem; /* Réduit le padding interne sur les petits écrans */
+    }
+`;
+
+const StyledButton = styled(Button)`
+    && {
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+
+        @media (max-width: 600px) {
+            margin-top: 2rem; /* Réduit la marge supérieure sur mobile */
+            margin-bottom: 1rem; /* Réduit la marge inférieure sur mobile */
+        }
+    }
+`;
 
 const Register = () => {
     const { register } = useContext(AuthContext);
@@ -59,7 +84,7 @@ const Register = () => {
                 S'inscrire
             </Typography>
             {error && <Alert severity="error" sx={{ width: '100%', mt: 2 }}>{error}</Alert>}
-            <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1, width: '100%' }}>
+            <StyledBox component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
                 <TextField
                     margin="normal"
                     required
@@ -115,19 +140,18 @@ const Register = () => {
                     error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
                     helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
                 />
-                <Button
+                <StyledButton
                     type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
-                    sx={{ mt: 3, mb: 2 }}
                 >
                     S'inscrire
-                </Button>
+                </StyledButton>
                 <Typography variant="body2" align="center">
                     Vous avez déjà un compte ? <Link to="/login">Se Connecter</Link>
                 </Typography>
-            </Box>
+            </StyledBox>
         </RegisterContainer>
     );
 };

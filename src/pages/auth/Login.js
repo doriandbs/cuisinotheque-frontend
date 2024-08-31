@@ -9,8 +9,33 @@ const LoginContainer = styled(Container)`
     flex-direction: column;
     align-items: center;
     margin-top: 5rem;
+  height: 100vh;
+
+    @media (max-width: 600px) {
+        margin-top: 2rem; /* Réduit la marge supérieure sur les petits écrans */
+        padding: 0 1rem; /* Ajoute du padding latéral pour éviter que le contenu ne touche les bords */
+    }
 `;
 
+const StyledBox = styled(Box)`
+    width: 100%;
+    
+    @media (max-width: 600px) {
+        padding: 0.5rem; /* Réduit le padding interne sur les petits écrans */
+    }
+`;
+
+const StyledButton = styled(Button)`
+    && {
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+
+        @media (max-width: 600px) {
+            margin-top: 2rem; /* Réduit la marge supérieure pour le bouton sur mobile */
+            margin-bottom: 1rem; /* Réduit la marge inférieure pour le bouton sur mobile */
+        }
+    }
+`;
 const Login = () => {
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -21,7 +46,6 @@ const Login = () => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
 
-    
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -32,8 +56,6 @@ const Login = () => {
             setError(err.message || 'Erreur lors de la connexion');
         }
     };
-    
-
 
     return (
         <LoginContainer maxWidth="xs">
@@ -41,7 +63,7 @@ const Login = () => {
                 Se Connecter
             </Typography>
             {error && <Alert severity="error" sx={{ width: '100%', mt: 2 }}>{error}</Alert>}
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, width: '100%' }}>
+            <StyledBox component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
                 <TextField
                     margin="normal"
                     required
@@ -66,19 +88,18 @@ const Login = () => {
                     value={credentials.password}
                     onChange={handleChange}
                 />
-                <Button
+                <StyledButton
                     type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
-                    sx={{ mt: 3, mb: 2 }}
                 >
                     Se Connecter
-                </Button>
+                </StyledButton>
                 <Typography variant="body2" align="center">
                     Vous n'avez pas de compte ? <Link to="/register">S'inscrire</Link>
                 </Typography>
-            </Box>
+            </StyledBox>
         </LoginContainer>
     );
 };

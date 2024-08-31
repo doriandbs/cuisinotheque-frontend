@@ -1,20 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import HomeService from '../../../services/homeService/HomeService';
+
 const RecipesContainer = styled.div`
   display: flex;
+  flex-direction: column;
   height: 100vh;
   background: linear-gradient(to right, #f8f9fa, #ececec);
   font-family: 'Roboto', sans-serif;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const RecipeList = styled.div`
-  width: 30%;
+  width: 100%;
   background-color: #ffffff;
   padding: 1rem;
   overflow-y: auto;
-  border-right: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+
+  @media (min-width: 768px) {
+    width: 30%;
+    border-bottom: none;
+    border-right: 1px solid #dee2e6;
+  }
 `;
 
 const RecipeListItem = styled.div`
@@ -43,6 +55,10 @@ const RecipeDetail = styled.div`
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   margin: 1rem;
+
+  @media (min-width: 768px) {
+    margin: 1rem;
+  }
 `;
 
 const RecipeTitle = styled.h2`
@@ -87,7 +103,6 @@ const AllRecipes = () => {
       try {
         const response = await HomeService.getAllRecipes();
         setRecipes(response.data);
-        console.log(response.data)
       } catch (error) {
         console.error('Erreur lors du chargement des recettes', error);
       }
@@ -99,7 +114,6 @@ const AllRecipes = () => {
   const handleRecipeSelect = (recipe) => {
     setSelectedRecipe(recipe);
   };
-  
 
   return (
     <RecipesContainer>
@@ -119,7 +133,7 @@ const AllRecipes = () => {
         {selectedRecipe ? (
           <>
             <RecipeTitle>{selectedRecipe.title}</RecipeTitle>
-            <h3>Ingrédients</h3>
+            <SectionTitle>Ingrédients</SectionTitle>
             <ul>
               {selectedRecipe.ingredients.map((ingredient, index) => (
                 <Ingredient key={index}>
@@ -127,7 +141,7 @@ const AllRecipes = () => {
                 </Ingredient>
               ))}
             </ul>
-            <h3>Instructions</h3>
+            <SectionTitle>Instructions</SectionTitle>
             <ul>
               {selectedRecipe.instructions.map((instruction, index) => (
                 <Instruction key={index}>{instruction.instruction}</Instruction>

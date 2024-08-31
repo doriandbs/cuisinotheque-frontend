@@ -7,9 +7,13 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { useContext } from 'react';
 
 const NavbarContainer = styled(AppBar)`
-  background-color: rgba(0, 0, 0, 0.7); /* Fond transparent */
-  box-shadow: none; /* Retire l'ombre pour un look plus propre */
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: none;
   padding: 0 2rem;
+
+  @media (max-width: 600px) {
+    padding: 0 1rem; /* Réduire la marge sur mobile */
+  }
 `;
 
 const Logo = styled.div`
@@ -19,6 +23,10 @@ const Logo = styled.div`
   display: flex;
   align-items: center;
   font-family: 'Pacifico', cursive;
+
+  @media (max-width: 600px) {
+    font-size: 1.4rem; /* Réduire la taille de la police sur mobile */
+  }
 `;
 
 const StyledButton = styled(Button)`
@@ -30,6 +38,11 @@ const StyledButton = styled(Button)`
     &:hover {
       color: #ffe082;
       transform: scale(1.1);
+    }
+
+    @media (max-width: 600px) {
+      margin-left: 0.5rem; /* Réduire les marges sur mobile */
+      font-size: 0.8rem; /* Réduire la taille des boutons sur mobile */
     }
   }
 `;
@@ -44,6 +57,11 @@ const UserButton = styled(Button)`
     &:hover {
       background-color: #00695c;
       transform: scale(1.1);
+    }
+
+    @media (max-width: 600px) {
+      margin-left: 0.5rem; /* Réduire les marges sur mobile */
+      font-size: 0.8rem; /* Réduire la taille des boutons sur mobile */
     }
   }
 `;
