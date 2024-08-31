@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import HomeService from '../../services/homeService/HomeService'; 
+import HomeService from '../../../services/homeService/HomeService';
 
 const RecipesContainer = styled.div`
   display: flex;
@@ -47,7 +47,7 @@ const Instruction = styled.li`
   margin-bottom: 0.5rem;
 `;
 
-const Recipes = () => {
+const AllRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
@@ -111,4 +111,4 @@ const Recipes = () => {
   );
 };
 
-export default Recipes;
+export default AllRecipes;

@@ -10,6 +10,7 @@ import Footer from './components/footer/Footer';
 import AuthProvider from './contexts/AuthContext'; 
 import PrivateRoute from './components/privateRoutes/PrivateRoute';
 import AddRecipe from './pages/recipes/addRecipe/AddRecipe';
+import AllRecipes from './pages/recipes/allRecipes/AllRecipes';
 
 const AppRoutes = () => {
   return (
@@ -38,6 +39,9 @@ const AppRoutes = () => {
                   />
                   <Route path="/addrecipe" element={
                     <AddRecipe/>
+                  }/>
+                   <Route path="/allrecipes" element={
+                    <AllRecipes/>
                   }/>
               </Routes>
               <Footer />

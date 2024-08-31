@@ -60,6 +60,9 @@ const Navbar = () => {
           </IconButton>
           Cuisinothèque
         </Logo>
+        <StyledButton component={Link} to="/allrecipes">
+              Toutes les recettes
+        </StyledButton>
         {user ? (
           <>
             <StyledButton component={Link} to="/recipes">
