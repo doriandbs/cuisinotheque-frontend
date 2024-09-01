@@ -13,7 +13,8 @@ const AddRecipe = () => {
   const [recipe, setRecipe] = useState(recipeDTO || {
     title: '',
     ingredients: [''],
-    instructions: ['']
+    instructions: [''],
+    images: []  
   });
 
   const handleChange = (e) => {
@@ -77,7 +78,33 @@ const AddRecipe = () => {
           value={recipe.title}
           onChange={handleChange}
         />
-        <Typography variant="h6" gutterBottom>
+        
+        {recipe.images && recipe.images.length > 0 && (
+          <>
+            <Typography variant="h6" gutterBottom sx={{ marginTop: '2rem' }}>
+              Images
+            </Typography>
+            <Grid container spacing={2}>
+      {recipe.images.map((image, index) => {
+        const srcValue = `data:image/webp;base64,${image.imageData}`;
+
+        return (
+          <Grid item xs={6} sm={4} md={3} key={index}>
+            <Paper elevation={3} sx={{ padding: '0.5rem', textAlign: 'center' }}>
+              <img
+                src={srcValue}
+                alt={`Recipe Image ${index + 1}`}
+                style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
+              />
+            </Paper>
+          </Grid>
+        );
+      })}
+    </Grid>
+          </>
+        )}
+        
+        <Typography variant="h6" gutterBottom sx={{ marginTop: '2rem' }}>
           Ingrédients
         </Typography>
         {recipe.ingredients.map((ingredient, index) => (

@@ -9,8 +9,9 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
+        console.log("TOKEENNN", token)
         if (token) {
-            axios.get('/user/hello', {
+            axios.get('/account/profile', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -36,6 +37,7 @@ const AuthProvider = ({ children }) => {
             const { token, user } = response.data;
             localStorage.setItem('token', token);
             setUser(user);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         } catch (err) {
             if (err.response?.status === 404) {
                 throw new Error('Utilisateur n\'a pas été trouvé');
@@ -45,15 +47,18 @@ const AuthProvider = ({ children }) => {
     };
 
     const register = async (userData) => {
+        console.log(userData)
         const response = await axios.post('/account/register', userData);
         const { token, user } = response.data;
         localStorage.setItem('token', token);
         setUser(user);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     };
 
     const logout = () => {
         localStorage.removeItem('token');
         setUser(null);
+        delete axios.defaults.headers.common['Authorization'];
     };
 
     return (

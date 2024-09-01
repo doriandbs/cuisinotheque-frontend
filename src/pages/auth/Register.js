@@ -11,7 +11,7 @@ const RegisterContainer = styled(Container)`
     flex-direction: column;
     align-items: center;
     margin-top: 5rem;
-  height: 100vh;
+    height: 100vh;
 
     @media (max-width: 600px) {
         margin-top: 2rem; /* Réduit la marge supérieure sur mobile */
@@ -46,12 +46,22 @@ const Register = () => {
 
     const formik = useFormik({
         initialValues: {
+            firstname: '',
+            lastname: '',
             username: '',
             email: '',
             password: '',
             confirmPassword: '',
         },
         validationSchema: Yup.object({
+            firstname: Yup.string()
+                .min(2, 'Au moins 2 caractères')
+                .max(30, 'Au plus 30 caractères')
+                .required('Requis'),
+            lastname: Yup.string()
+                .min(2, 'Au moins 2 caractères')
+                .max(30, 'Au plus 30 caractères')
+                .required('Requis'),
             username: Yup.string()
                 .min(3, 'Au moins 3 caractères')
                 .max(20, 'Au plus 20 caractères')
@@ -69,8 +79,9 @@ const Register = () => {
         onSubmit: async (values) => {
             setError('');
             try {
-                const { username, email, password } = values;
-                await register({ username, email, password });
+                const { firstname, lastname, username, email, password } = values;
+                console.log(values)
+                await register({ firstname, lastname, username, email, password });
                 navigate('/profile');
             } catch (err) {
                 setError(err.response?.data?.message || 'Erreur lors de l\'inscription');
@@ -89,11 +100,37 @@ const Register = () => {
                     margin="normal"
                     required
                     fullWidth
+                    id="firstname"
+                    label="Prénom"
+                    name="firstname"
+                    autoComplete="given-name"
+                    autoFocus
+                    value={formik.values.firstname}
+                    onChange={formik.handleChange}
+                    error={formik.touched.firstname && Boolean(formik.errors.firstname)}
+                    helperText={formik.touched.firstname && formik.errors.firstname}
+                />
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="lastname"
+                    label="Nom"
+                    name="lastname"
+                    autoComplete="family-name"
+                    value={formik.values.lastname}
+                    onChange={formik.handleChange}
+                    error={formik.touched.lastname && Boolean(formik.errors.lastname)}
+                    helperText={formik.touched.lastname && formik.errors.lastname}
+                />
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
                     id="username"
                     label="Nom d'utilisateur"
                     name="username"
                     autoComplete="username"
-                    autoFocus
                     value={formik.values.username}
                     onChange={formik.handleChange}
                     error={formik.touched.username && Boolean(formik.errors.username)}

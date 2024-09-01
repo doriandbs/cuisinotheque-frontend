@@ -106,7 +106,7 @@ const MessageContainer = styled.div`
 const Home = () => {
   const { user } = useContext(AuthContext);  
   const [url, setUrl] = useState('');
-  const [recipeText, setRecipeText] = useState(''); // New state for recipe text
+  const [recipeText, setRecipeText] = useState(''); 
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -116,7 +116,7 @@ const Home = () => {
       let response;
       console.log("recipeText", recipeText)
       if (recipeText) {
-        response = await HomeService.analyzeRecipeText(recipeText); // New service method for text
+        response = await HomeService.analyzeRecipeText(recipeText);
       } else if (url) {
         response = await HomeService.scrapeRecipe(url);
       }
@@ -128,7 +128,7 @@ const Home = () => {
 
   return (
     <HomeContainer>
-      <Title>Bienvenue à Cuisinothèque</Title>
+      <Title>Bienvenue dans votre Cuisinothèque</Title>
       <Subtitle>Votre bibliothèque personnelle de recettes</Subtitle>
       {user ? (
         <>
