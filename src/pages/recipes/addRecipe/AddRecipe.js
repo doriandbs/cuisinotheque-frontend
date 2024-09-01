@@ -45,6 +45,11 @@ const AddRecipe = () => {
     setRecipe({ ...recipe, ingredients: newIngredients });
   };
 
+  const removeImage = (index) => {
+    const newImages = recipe.images.filter((_, i) => i !== index);
+    setRecipe({ ...recipe, images: newImages });
+  };
+
   const addInstruction = () => {
     setRecipe({ ...recipe, instructions: [...recipe.instructions, ''] });
   };
@@ -97,7 +102,14 @@ const AddRecipe = () => {
                 style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
               />
             </Paper>
+            <Grid item xs={2}>
+              <IconButton onClick={() => removeImage(index)}>
+                <DeleteIcon color="error" />
+              </IconButton>
+            </Grid>
           </Grid>
+          
+          
         );
       })}
     </Grid>

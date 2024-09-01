@@ -219,10 +219,10 @@ const Recipes = () => {
 
   const sliderSettings = {
     dots: true,
-    infinite: true,
+    infinite: selectedRecipe.images.length > 3, 
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1
+    slidesToShow: Math.min(selectedRecipe.images.length, 3), 
+    slidesToScroll: 1,
   };
 
   return (
